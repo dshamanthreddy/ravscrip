@@ -1,0 +1,7 @@
+chmod +x /mangodb.sh
+
+bash /mangodb.sh
+
+
+## Backup database daily at 02:00 AM
+0 2 * * * /backup/mangodb.sh
