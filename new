@@ -1,0 +1,25 @@
+#!/bin/bash
+
+# MongoDB host and port
+MONGO_HOST="localhost"
+MONGO_PORT="27017"
+
+# Backup directory
+BACKUP_DIR="/path/to/backup/directory"
+
+# Timestamp (for creating a unique backup folder)
+TIMESTAMP=$(date +'%Y%m%d%H%M%S')
+
+# Create a directory with the current timestamp for the backup
+BACKUP_FOLDER="$BACKUP_DIR/$TIMESTAMP"
+mkdir -p "$BACKUP_FOLDER"
+
+# Run mongodump to create the backup
+mongodump --host $MONGO_HOST --port $MONGO_PORT --out $BACKUP_FOLDER
+
+# Check if the backup was successful
+if [ $? -eq 0 ]; then
+    echo "Backup completed successfully. Backup saved to: $BACKUP_FOLDER"
+else
+    echo "Backup failed."
+fi
